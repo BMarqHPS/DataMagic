@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ServiceLibrary.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ServiceLibrary.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="OrderStatusRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderStatusRequest" nillable="true" type="tns:OrderStatusRequest" />
+  <xs:complexType name="OrderStatusResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Exception" nillable="true" type="tns:ServiceException" />
+      <xs:element minOccurs="0" name="HasException" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ItemStatuses" nillable="true" type="tns:ArrayOfOrderItemStatus" />
+      <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderStatusResult" nillable="true" type="tns:OrderStatusResult" />
+  <xs:complexType name="ServiceException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Severity" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceException" nillable="true" type="tns:ServiceException" />
+  <xs:complexType name="ArrayOfOrderItemStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItemStatus" nillable="true" type="tns:OrderItemStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderItemStatus" nillable="true" type="tns:ArrayOfOrderItemStatus" />
+  <xs:complexType name="OrderItemStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderlineItemId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductIdentifier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QtyBackordered" type="xs:int" />
+      <xs:element minOccurs="0" name="QtyCancelled" type="xs:int" />
+      <xs:element minOccurs="0" name="QtyOrdered" type="xs:int" />
+      <xs:element minOccurs="0" name="QtyShipped" type="xs:int" />
+      <xs:element minOccurs="0" name="TrackingInformation" nillable="true" type="tns:ArrayOfItemTracking" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderItemStatus" nillable="true" type="tns:OrderItemStatus" />
+  <xs:complexType name="ArrayOfItemTracking">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemTracking" nillable="true" type="tns:ItemTracking" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItemTracking" nillable="true" type="tns:ArrayOfItemTracking" />
+  <xs:complexType name="ItemTracking">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Carrier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderLineItemId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RecvDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ShipDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TrackingNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackingUrl" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItemTracking" nillable="true" type="tns:ItemTracking" />
+  <xs:complexType name="ShippingInfoRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShippingInfoRequest" nillable="true" type="tns:ShippingInfoRequest" />
+  <xs:complexType name="ShippingInfoResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Exception" nillable="true" type="tns:ServiceException" />
+      <xs:element minOccurs="0" name="HasException" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Manifests" nillable="true" type="tns:ArrayOfItemTracking" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShippingInfoResult" nillable="true" type="tns:ShippingInfoResult" />
+  <xs:complexType name="SubmitOrderRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LineItems" nillable="true" type="tns:ArrayOfOrderLineItem" />
+      <xs:element minOccurs="0" name="OrderNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShipToAddress" nillable="true" type="tns:Address" />
+      <xs:element minOccurs="0" name="ShipToFirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShipToLastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShipToPhone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SubmitOrderRequest" nillable="true" type="tns:SubmitOrderRequest" />
+  <xs:complexType name="ArrayOfOrderLineItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderLineItem" nillable="true" type="tns:OrderLineItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderLineItem" nillable="true" type="tns:ArrayOfOrderLineItem" />
+  <xs:complexType name="OrderLineItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GiftMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderLineItemId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductIdentifier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="ShippingMethod" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderLineItem" nillable="true" type="tns:OrderLineItem" />
+  <xs:complexType name="Address">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Line1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Line2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Address" nillable="true" type="tns:Address" />
+  <xs:complexType name="SubmitOrderResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Exception" nillable="true" type="tns:ServiceException" />
+      <xs:element minOccurs="0" name="HasException" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OrderItems" nillable="true" type="tns:ArrayOfLineItemStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SubmitOrderResult" nillable="true" type="tns:SubmitOrderResult" />
+  <xs:complexType name="ArrayOfLineItemStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LineItemStatus" nillable="true" type="tns:LineItemStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLineItemStatus" nillable="true" type="tns:ArrayOfLineItemStatus" />
+  <xs:complexType name="LineItemStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderLineItemId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductIdentifier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QtyReserved" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LineItemStatus" nillable="true" type="tns:LineItemStatus" />
+</xs:schema>
